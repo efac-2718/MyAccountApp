@@ -26,7 +26,7 @@ export default function RegistrationScreen() {
     }
 
     router.push({
-      pathname. '/review',
+      pathname: '/review',
       params: { userName, email, phoneNumber}
     });
   }
