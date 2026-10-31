@@ -16,7 +16,6 @@ export default function SuccessScreen() {
 const styles = StyleSheet.create({
     container:{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20},
     emoji: {fontSize: 60, marginBottom: 20},
-    greeting:{fontSize: 28, fontWeight: 'bold', color: 'green', marginBottom: 10},
     greeting: {fontSize: 28, fontWeight: 'bold', color: 'green', marginBottom: 10},
     subtitle: {fontSize: 16, color:'#555', textAlign: 'center'}
 })
