@@ -1,13 +1,11 @@
-import {useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 
 export default function ReviewScreen() {
     const router = useRouter(); // 'useRouter' is used to navigate between screens
 
-    // 'useLocalSearchParams' is used to retrieve parameters passed from the previous screen
     const {userName, email, phoneNumber, age } = useLocalSearchParams();
 
-    //handleConfirm only moves to the success screen if the user is 18 or older. Otherwise it shows an Alert and stays on this screen.
     const handleConfirm = () => {
         if (Number(age) < 18) {
             Alert.alert('Age Restriction', 'You must be at least 18 years old to proceed.');
