@@ -1,12 +1,19 @@
 import {useLocalSearchParams, useRouter } from 'expo-router';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 
 export default function ReviewScreen() {
-    const router = useRouter();
-    
-    const {userName, email, phoneNumber } = useLocalSearchParams(); 
+    const router = useRouter(); // 'useRouter' is used to navigate between screens
 
-    const handeConfrm = () => {
+    // 'useLocalSearchParams' is used to retrieve parameters passed from the previous screen
+    const {userName, email, phoneNumber, age } = useLocalSearchParams();
+
+    //handleConfirm only moves to the success screen if the user is 18 or older. Otherwise it shows an Alert and stays on this screen.
+    const handleConfirm = () => {
+        if (Number(age) < 18) {
+            Alert.alert('Age Restriction', 'You must be at least 18 years old to proceed.');
+            return;
+        }
+
         router.push({
             pathname: '/success',
             params: {userName}
@@ -18,15 +25,17 @@ export default function ReviewScreen() {
             <Text style={styles.title}>Review Your Details</Text>
 
             <View style={styles.card}>
-            <Text style={styles.details}>Username: {userName}</Text>
-            <Text style={styles.details}>Email: {email}</Text>
-            <Text style={styles.details}>Phone Number: {phoneNumber}</Text>
+            <Text style={styles.detail}>Username: {userName}</Text>
+            <Text style={styles.detail}>Email: {email}</Text>
+            <Text style={styles.detail}>Phone Number: {phoneNumber || 'Not provided'}</Text>
+            <Text style={styles.detail}>Age: {age}</Text>
             </View>
 
             <View style={styles.buttonContainer}>
+                {/* router.back() pops this screen off the stack, returning to the previous screen's preserved state */}
                 <Button title="Edit Info" color="red" onPress={() => router.back()} />
-                <Button title="Confirm & Submit" onPress={handeConfrm} />
-            </View> 
+                <Button title="Confirm & Submit" onPress={handleConfirm} />
+            </View>
         </View>
     );
 }
